@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <script
+      src="https://code.jquery.com/jquery-2.2.4.min.js"
+      integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+      crossorigin="anonymous"></script>
+</head>
+<body>
+<form action="" method="get">
+	<ul class="list-group sidenav mt-5">
+		<li class="list-group-item border-0 rounded-top">
+            <label for="date">날짜</label>
+            <input type="date" class="form-control" id="date" name="d" placeholder="" value="{{ get_date }}">
+		</li>
+		<li class="list-group-item border-0">
+            <label for="time">시간</label>
+            <select class="custom-select d-block w-100" id="time" name="t" value="{{ get_time }}">
+				<option value="">-- : --</option>
+				{% for time in time_list %}
+				<option value="{{ time }}">{{ time }}</option>
+				{% endfor %}
+            </select>
+   		</li>
+		<li class="list-group-item border-0">
+            <label for="place">장소</label>
+            <input type="text" class="form-control" id="place" name="p" placeholder="">
+		</li>
+		<li class="list-group-item border-0">
+            <label for="genre">장르</label>
+            <select class="custom-select d-block w-100" id="genre" name="g" value="">
+				<option value="">----</option>
+            </select>
+
+		</li>
+        <button class="btn btn-dark rounded-bottom" type="submit">검색하기</button>
+	</ul>
+</form>
+<script>
+    $( document ).ready(function() {
+        document.getElementById("time").value = '{{ get_time }}';
+        document.getElementById("date").value = '{{ get_date }}';
+    });
+</script>
+{% for perform in perform_list %}
+<li>{{ perform }}</li>
+{% endfor %}
+</body>
+</html>
