@@ -119,3 +119,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# Django 내장 라이브러리를 Import 한다.
+EMAIL_HOST = 'smtp.gmail.com'
+# 메일을 호스트하는 서버이고 gmail을 사용할 것 이다.
+EMAIL_PORT = '587'
+# gmail에서 권장하는 이메일 통신 포트이다.
+EMAIL_HOST_USER = 'aiden@tirrilee.io'
+# 발신할 이메일 입력한다.
+EMAIL_HOST_PASSWORD = 'rkdekrn1!'
+# 발신할 이메일 비밀번호를 입력한다.
+EMAIL_USE_TLS = True
+# TLS 사용 여부에 대한 설정이고 TLS는 보안 방법 중 하나이다.
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+# 사이트와 관련한 자동응답을 받을 이메일 주소로 기본값은 'webmaster@localhost'라고 한다.

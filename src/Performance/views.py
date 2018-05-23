@@ -41,3 +41,29 @@ def PerFormView(request):
         'get_date' : get_date,
         'perform_list' : perform_list,
     })
+
+def SuccessView(request):
+    return render(request, 'success.html', {})
+
+from django.core.mail import send_mail, BadHeaderError
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
+
+def mail_form(request):
+    return render(request, 'contact.html', {})
+
+def send_email(request):
+    subject = request.POST.get('subject', '')          # Template에서 입력받은 제목
+    message = request.POST.get('message', '')          # Template에서 입력받은 내용
+    from_email = request.POST.get('from_email', '')    # Template에서 입력받은 이메일
+    if subject and message and from_email:
+        print(subject)
+        try:
+            send_mail(subject, message, from_email, ['aiden@tirrilee.io'])
+            print("메일보내기 성공")
+            return HttpResponseRedirect('/success')  # 메일 보내기에 성공했을시, 연결되는 링크
+        except BadHeaderError:
+            return HttpResponse('헤더 설정이 잘못 되었습니다.')
+    else:
+        # 실제로는 Form Class를 사용하고, 알아서 적절한 오류 메세지를 출력합니다.
+        return HttpResponse('빈칸을 알맞게 채웠는지 확인하세요.')
